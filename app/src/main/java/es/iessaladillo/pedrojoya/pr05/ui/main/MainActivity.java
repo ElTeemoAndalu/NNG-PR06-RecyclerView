@@ -18,9 +18,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import es.iessaladillo.pedrojoya.pr05.R;
 import es.iessaladillo.pedrojoya.pr05.data.local.business.FieldEnabler;
+import es.iessaladillo.pedrojoya.pr05.databinding.ActivityMainBinding;
+import es.iessaladillo.pedrojoya.pr05.databinding.ActivityMainProfileBinding;
 import es.iessaladillo.pedrojoya.pr05.ui.avatar.AvatarActivity;
 import es.iessaladillo.pedrojoya.pr05.utils.KeyboardUtils;
 import es.iessaladillo.pedrojoya.pr05.utils.SnackBarUtils;
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private String errorMsg;
     private ImageView imgEmail, imgPhone, imgAddress, imgWeb;
     private MainActivityViewModel model;
+    private ActivityMainBinding db;
+    private ActivityMainProfileBinding dbPro;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setContentView(R.layout.activity_main);
         model = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         setupViews();

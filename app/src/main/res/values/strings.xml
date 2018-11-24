@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NNG-PR05_OrientationChange</string>
+    <string name="app_name">NNG-PR06-RecyclerView</string>
     <string name="avatar_label">Select Avatar</string>
     <string name="main_invalid_data">Invalid data</string>
     <string name="main_save">Save</string>
@@ -24,4 +24,5 @@
     <string name="main_lblAvatar_defaultName">Tom</string>
     <string name="avatar_DefaultCatName">TextView</string>
     <string name="profileImgRatio">16:9</string>
+    <string name="userlist_lblEmptyView">Add user</string>
 </resources>

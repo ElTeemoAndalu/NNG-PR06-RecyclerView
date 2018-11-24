@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.Avatar;
 
 import static junit.framework.TestCase.assertEquals;

@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr05.ui.main;
+package es.iessaladillo.pedrojoya.pr05.ui.profile;
 
 
 import android.graphics.Typeface;
@@ -12,7 +12,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import es.iessaladillo.pedrojoya.pr05.R;
-import es.iessaladillo.pedrojoya.pr05.data.local.Database;
+import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.Avatar;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -35,10 +35,10 @@ import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MainActivityTest {
+public class ProfileActivityTest {
 
     @Rule
-    public final IntentsTestRule<MainActivity> testRule = new IntentsTestRule<>(MainActivity.class);
+    public final IntentsTestRule<ProfileActivity> testRule = new IntentsTestRule<>(ProfileActivity.class);
 
     @Before
     public void setup() {

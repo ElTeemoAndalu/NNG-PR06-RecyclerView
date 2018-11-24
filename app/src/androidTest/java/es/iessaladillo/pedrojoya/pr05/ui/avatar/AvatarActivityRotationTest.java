@@ -11,7 +11,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import es.iessaladillo.pedrojoya.pr05.R;
-import es.iessaladillo.pedrojoya.pr05.data.local.Database;
+import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 import es.iessaladillo.pedrojoya.pr05.utils.ResourcesUtils;
 import es.iessaladillo.pedrojoya.pr05.utils.Rotation;
 

@@ -11,7 +11,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import es.iessaladillo.pedrojoya.pr05.R;
-import es.iessaladillo.pedrojoya.pr05.data.local.Database;
+import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.test.espresso.Espresso.onView;

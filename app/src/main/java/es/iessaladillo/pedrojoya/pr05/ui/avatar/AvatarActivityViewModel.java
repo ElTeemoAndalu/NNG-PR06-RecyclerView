@@ -3,7 +3,7 @@ package es.iessaladillo.pedrojoya.pr05.ui.avatar;
 import java.util.List;
 
 import androidx.lifecycle.ViewModel;
-import es.iessaladillo.pedrojoya.pr05.data.local.Database;
+import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.Avatar;
 
 class AvatarActivityViewModel extends ViewModel {

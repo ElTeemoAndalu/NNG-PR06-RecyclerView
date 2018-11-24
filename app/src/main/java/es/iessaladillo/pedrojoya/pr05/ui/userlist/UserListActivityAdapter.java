@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr05.ui.userlist;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +17,10 @@ import es.iessaladillo.pedrojoya.pr05.data.local.model.User;
 
 public class UserListActivityAdapter extends ListAdapter<User, UserListActivityAdapter.ViewHolder> {
 
+    private final OnDeleteClickListener deleteListener;
+    private final OnEditClickListener editListener;
 
-    public UserListActivityAdapter() {
+    public UserListActivityAdapter(OnEditClickListener editListener, OnDeleteClickListener deleteListener) {
         super(new DiffUtil.ItemCallback<User>() {
             @Override
             public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
@@ -27,10 +29,12 @@ public class UserListActivityAdapter extends ListAdapter<User, UserListActivityA
 
             @Override
             public boolean areContentsTheSame(@NonNull User oldItem, @NonNull User newItem) {
-                return TextUtils.equals(oldItem.getName(), newItem.getName()) &&
-                        oldItem.getId() == newItem.getId();
+                return oldItem.equals(newItem);
             }
         });
+
+        this.editListener = editListener;
+        this.deleteListener = deleteListener;
     }
 
 
@@ -45,7 +49,7 @@ public class UserListActivityAdapter extends ListAdapter<User, UserListActivityA
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.activity_user_list_item, parent, false));
+                        .inflate(R.layout.activity_user_list_item, parent, false), editListener, deleteListener);
     }
 
     @Override
@@ -57,13 +61,19 @@ public class UserListActivityAdapter extends ListAdapter<User, UserListActivityA
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView lblName,lblEmail,lblPhoneNumber;
         private final ImageView imgAvatar;
+        private final Button btnEdit,btnDelete;
 
-        ViewHolder(View itemView) {
+        ViewHolder(View itemView,OnEditClickListener editListener, OnDeleteClickListener deleteListener) {
             super(itemView);
             lblName = ViewCompat.requireViewById(itemView, R.id.lblName);
             lblEmail = ViewCompat.requireViewById(itemView, R.id.lblEmail);
             lblPhoneNumber = ViewCompat.requireViewById(itemView, R.id.lblPhone);
             imgAvatar = ViewCompat.requireViewById(itemView, R.id.imgAvatar);
+            btnEdit = ViewCompat.requireViewById(itemView, R.id.btnEdit);
+            btnDelete = ViewCompat.requireViewById(itemView, R.id.btnDelete);
+
+            btnEdit.setOnClickListener(v -> editListener.onEditClick(getAdapterPosition()));
+            btnDelete.setOnClickListener(v -> deleteListener.onDeleteClick(getAdapterPosition()));
         }
 
         void bind(User user) {

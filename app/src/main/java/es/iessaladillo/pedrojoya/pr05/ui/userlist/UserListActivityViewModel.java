@@ -20,7 +20,11 @@ public class UserListActivityViewModel extends ViewModel {
         return users;
     }
 
-    void deleteStudent(User user) {
+    void deleteUser(User user) {
         database.deleteUser(user);
+    }
+
+    void editUser(User user) {
+        database.editUser(user);
     }
 }

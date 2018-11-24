@@ -31,7 +31,14 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        ulistAdapter = new UserListActivityAdapter();
+        ulistAdapter = new UserListActivityAdapter(
+                position -> {
+                    funca(ulistAdapter.getItem(position));
+                },
+                position2 ->{
+                    funca2(ulistAdapter.getItem(position2));
+                }
+        );
         db.lstUser.setHasFixedSize(true);
         db.lstUser.setLayoutManager(new GridLayoutManager(this,
                 getResources().getInteger(R.integer.main_lstUser_colums)));
@@ -46,8 +53,19 @@ public class UserListActivity extends AppCompatActivity {
         });
     }
 
-    private void showStudent(User user) {
-        Toast.makeText(this, user.getName(), Toast.LENGTH_SHORT).show();
+    private void editUser(User user) {
+        vm.editUser(user);
+    }
+    private void deleteUser(User user) {
+        vm.deleteUser(user);
+    }
+
+    private void funca(User user) {
+        Toast.makeText(this,user.getName() + " ha sido editao",Toast.LENGTH_SHORT).show();
+    }
+
+    private void funca2(User user) {
+        Toast.makeText(this,user.getName() + " ha sido borrao",Toast.LENGTH_SHORT).show();
     }
 
 

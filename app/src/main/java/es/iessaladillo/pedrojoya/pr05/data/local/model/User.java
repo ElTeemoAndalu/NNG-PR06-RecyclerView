@@ -1,9 +1,11 @@
 package es.iessaladillo.pedrojoya.pr05.data.local.model;
 
+import androidx.annotation.Nullable;
+
 public class User {
     private int id;
     private Avatar avatar;
-    private String name,email,phone,address,web;
+    private String name, email, phone, address, web;
 
     public User() {
     }
@@ -18,7 +20,7 @@ public class User {
         this.web = web;
     }
 
-    public void editUser(User user){
+    public void editUser(User user) {
         this.avatar = user.avatar;
         this.name = user.name;
         this.email = user.email;
@@ -55,5 +57,22 @@ public class User {
 
     public String getWeb() {
         return web;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        boolean result = false;
+        if (obj instanceof User
+                && name.equals(((User) obj).name)
+                && avatar.equals(((User) obj).avatar)
+                && email.equals(((User) obj).email)
+                && phone.equals(((User) obj).phone)
+                && address.equals(((User) obj).address)
+                && web.equals(((User) obj).web)) {
+
+            result = true;
+
+        }
+        return result;
     }
 }

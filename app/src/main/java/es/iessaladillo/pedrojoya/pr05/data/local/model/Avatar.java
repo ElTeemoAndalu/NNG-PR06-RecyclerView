@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 
 public class Avatar implements Parcelable {
 
@@ -62,4 +63,9 @@ public class Avatar implements Parcelable {
             return new Avatar[size];
         }
     };
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return (obj instanceof Avatar && ((Avatar) obj).id == id) ? true : false;
+    }
 }

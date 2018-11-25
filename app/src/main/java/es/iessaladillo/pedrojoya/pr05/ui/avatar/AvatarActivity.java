@@ -44,12 +44,6 @@ public class AvatarActivity extends AppCompatActivity {
         setupViews();
     }
 
-    private void getIntentData(Intent intent) {
-        if (intent != null && intent.hasExtra(EXTRA_AVATAR)) {
-            model.setSelectedAvatar(intent.getParcelableExtra(EXTRA_AVATAR));
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_avatar, menu);
@@ -154,6 +148,8 @@ public class AvatarActivity extends AppCompatActivity {
         imageView.setAlpha(ResourcesUtils.getFloat(this, R.dimen.avatar_not_selected_image_alpha));
     }
 
+
+    //-----------------------------------------METHODS TO START ACTIVITIES----------------------------------------------
     public static void startForResult(Activity actividad, int requestCode, Avatar avatar) {
         Intent intent = new Intent(actividad, AvatarActivity.class);
         intent.putExtra(EXTRA_AVATAR, avatar);
@@ -170,6 +166,12 @@ public class AvatarActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_AVATAR, model.getSelectedAvatar());
         this.setResult(RESULT_OK, intent);
+    }
+
+    private void getIntentData(Intent intent) {
+        if (intent != null && intent.hasExtra(EXTRA_AVATAR)) {
+            model.setSelectedAvatar(intent.getParcelableExtra(EXTRA_AVATAR));
+        }
     }
 
 }

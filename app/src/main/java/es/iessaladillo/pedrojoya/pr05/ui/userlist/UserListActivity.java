@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr05.ui.userlist;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -9,13 +10,17 @@ import es.iessaladillo.pedrojoya.pr05.R;
 import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.User;
 import es.iessaladillo.pedrojoya.pr05.databinding.ActivityUserListBinding;
+import es.iessaladillo.pedrojoya.pr05.ui.avatar.AvatarActivity;
+import es.iessaladillo.pedrojoya.pr05.ui.profile.ProfileActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 public class UserListActivity extends AppCompatActivity {
 
+    private static final int RC_PROFILE = 9999;
     private ActivityUserListBinding db;
     private UserListActivityViewModel vm;
     private UserListActivityAdapter ulistAdapter;
@@ -33,10 +38,10 @@ public class UserListActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         ulistAdapter = new UserListActivityAdapter(
                 position -> {
-                    funca(ulistAdapter.getItem(position));
+                    editUser(ulistAdapter.getItem(position));
                 },
                 position2 ->{
-                    funca2(ulistAdapter.getItem(position2));
+                    deleteUser(ulistAdapter.getItem(position2));
                 }
         );
         db.lstUser.setHasFixedSize(true);
@@ -54,19 +59,34 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void editUser(User user) {
+        selectAvatarImg();
         vm.editUser(user);
     }
     private void deleteUser(User user) {
         vm.deleteUser(user);
     }
 
-    private void funca(User user) {
-        Toast.makeText(this,user.getName() + " ha sido editao",Toast.LENGTH_SHORT).show();
+    //---------------------------------------METHODS TO START ACTIVITIES---------------------------
+    private void selectAvatarImg() {
+        ProfileActivity.startForResult(this, RC_PROFILE, null);
     }
 
-    private void funca2(User user) {
-        Toast.makeText(this,user.getName() + " ha sido borrao",Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK && requestCode == RC_PROFILE) {
+//            getSelectedAvatar(data);
+            Toast.makeText(this,"Ya he vuelto",Toast.LENGTH_SHORT).show();
+        }
     }
 
+//    private void getSelectedAvatar(Intent receivedIntent) {
+//        if (receivedIntent != null && receivedIntent.hasExtra(AvatarActivity.EXTRA_AVATAR)) {
+//            model.setProfileAvatar(receivedIntent.getParcelableExtra(AvatarActivity.EXTRA_AVATAR));
+//        }
+//
+//        configAvatarProfile();
+//    }
+
+    //----------------------------------------------------------------------------------------------
 
 }

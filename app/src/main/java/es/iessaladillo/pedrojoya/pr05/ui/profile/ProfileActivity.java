@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr05.ui.profile;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import es.iessaladillo.pedrojoya.pr05.R;
 import es.iessaladillo.pedrojoya.pr05.data.local.business.FieldEnabler;
+import es.iessaladillo.pedrojoya.pr05.data.local.model.Avatar;
+import es.iessaladillo.pedrojoya.pr05.data.local.model.User;
 import es.iessaladillo.pedrojoya.pr05.databinding.ActivityMainProfileBinding;
 import es.iessaladillo.pedrojoya.pr05.ui.avatar.AvatarActivity;
 import es.iessaladillo.pedrojoya.pr05.utils.KeyboardUtils;
@@ -45,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String errorMsg;
     private ProfileActivityViewModel model;
     private ActivityMainProfileBinding dbPro;
+    public static final String EXTRA_PROFILE = "EXTRA_PROFILE";
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -79,6 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
         lblFields[ADDRESS] = ActivityCompat.requireViewById(this, R.id.lblAddress);
         lblFields[WEB] = ActivityCompat.requireViewById(this, R.id.lblWeb);
 
+        getIntentData(getIntent());
 
         model.setDefaultAvatar();
         configAvatarProfile();
@@ -306,6 +312,32 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    //---------------------------------------METHODS TO START ACTIVITIES---------------------------
+    public static void startForResult(Activity actividad, int requestCode, User user) {
+        Intent intent = new Intent(actividad, ProfileActivity.class);
+//        intent.putExtra(EXTRA_AVATAR, avatar);
+        actividad.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public void finish() {
+//        sendAvatarBack();
+        super.finish();
+    }
+//
+//    private void sendAvatarBack() {
+//        Intent intent = new Intent();
+//        intent.putExtra(EXTRA_AVATAR, model.getSelectedAvatar());
+//        this.setResult(RESULT_OK, intent);
+//    }
+
+    private void getIntentData(Intent intent) {
+        if (intent != null && intent.hasExtra(EXTRA_PROFILE)) {
+            Toast.makeText(this,"Ya toy aqui",Toast.LENGTH_SHORT).show();
+//            model.setSelectedAvatar(intent.getParcelableExtra(EXTRA_AVATAR));
+        }
     }
 
 }

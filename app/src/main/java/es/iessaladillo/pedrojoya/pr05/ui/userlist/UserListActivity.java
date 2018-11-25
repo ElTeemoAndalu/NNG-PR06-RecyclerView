@@ -10,17 +10,16 @@ import es.iessaladillo.pedrojoya.pr05.R;
 import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.User;
 import es.iessaladillo.pedrojoya.pr05.databinding.ActivityUserListBinding;
-import es.iessaladillo.pedrojoya.pr05.ui.avatar.AvatarActivity;
 import es.iessaladillo.pedrojoya.pr05.ui.profile.ProfileActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 public class UserListActivity extends AppCompatActivity {
 
-    private static final int RC_PROFILE = 9999;
+    private static final int RC_PROFILE_EDIT = 9999;
+    private static final int RC_PROFILE_ADD = 3000;
     private ActivityUserListBinding db;
     private UserListActivityViewModel vm;
     private UserListActivityAdapter ulistAdapter;
@@ -31,14 +30,20 @@ public class UserListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_list);
         db = DataBindingUtil.setContentView(this,R.layout.activity_user_list);
         vm = ViewModelProviders.of(this, new UserListActivityViewModelFactory(Database.getInstance())).get(UserListActivityViewModel.class);
-        setupRecyclerView();
+        setupViews();
         observeUsers();
+    }
+
+    private void setupViews() {
+        setupRecyclerView();
+        db.lblEmptyView.setOnClickListener(v -> goToProfile(null,RC_PROFILE_ADD));
+        db.floatingActionButton2.setOnClickListener(v -> goToProfile(null,RC_PROFILE_ADD));
     }
 
     private void setupRecyclerView() {
         ulistAdapter = new UserListActivityAdapter(
                 position -> {
-                    editUser(ulistAdapter.getItem(position));
+                    goToProfile(ulistAdapter.getItem(position), RC_PROFILE_EDIT);
                 },
                 position2 ->{
                     deleteUser(ulistAdapter.getItem(position2));
@@ -59,33 +64,38 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void editUser(User user) {
-        selectAvatarImg(user);
         vm.editUser(user);
     }
     private void deleteUser(User user) {
         vm.deleteUser(user);
     }
 
+    private void addUser(User user){
+        vm.addUser(user);
+    }
+
     //---------------------------------------METHODS TO START ACTIVITIES---------------------------
-    private void selectAvatarImg(User user) {
-        ProfileActivity.startForResult(this, RC_PROFILE, user);
+    private void goToProfile(User user,int requestCode) {
+        ProfileActivity.startForResult(this, requestCode, user);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK && requestCode == RC_PROFILE) {
-//            getSelectedAvatar(data);
-            Toast.makeText(this,"Ya he vuelto",Toast.LENGTH_SHORT).show();
+        if (resultCode == RESULT_OK) {
+            getReturnedUser(data);
+            if (requestCode == RC_PROFILE_EDIT) {
+                editUser(vm.getReturnedUser());
+            } else if(requestCode == RC_PROFILE_ADD){
+                addUser(vm.getReturnedUser() );
+            }
         }
     }
 
-//    private void getSelectedAvatar(Intent receivedIntent) {
-//        if (receivedIntent != null && receivedIntent.hasExtra(AvatarActivity.EXTRA_AVATAR)) {
-//            model.setProfileAvatar(receivedIntent.getParcelableExtra(AvatarActivity.EXTRA_AVATAR));
-//        }
-//
-//        configAvatarProfile();
-//    }
+    private void getReturnedUser(Intent receivedIntent) {
+        if (receivedIntent != null && receivedIntent.hasExtra(ProfileActivity.EXTRA_PROFILE)) {
+            vm.setReturnedUser(receivedIntent.getParcelableExtra(ProfileActivity.EXTRA_PROFILE));
+        }
+    }
 
     //----------------------------------------------------------------------------------------------
 

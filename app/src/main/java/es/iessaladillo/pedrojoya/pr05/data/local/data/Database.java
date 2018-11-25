@@ -108,9 +108,10 @@ public class Database {
     }
 
     public void editUser(User user) {
-        for (User userOfDB: users) {
-            if (userOfDB.getId() == user.getId()) {
-                userOfDB.editUser(user);
+        for (int i = 0; i < users.size(); i++) {
+            if(users.get(i).getId() == user.getId()){
+                users.set(i,user);
+                break;
             }
         }
         updateUsersLiveData();

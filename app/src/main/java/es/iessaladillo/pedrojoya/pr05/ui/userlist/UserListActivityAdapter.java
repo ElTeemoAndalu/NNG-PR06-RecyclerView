@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr05.ui.userlist;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,10 @@ public class UserListActivityAdapter extends ListAdapter<User, UserListActivityA
 
             @Override
             public boolean areContentsTheSame(@NonNull User oldItem, @NonNull User newItem) {
-                return oldItem.equals(newItem);
+                return TextUtils.equals(oldItem.getName(),newItem.getName()) &&
+                        TextUtils.equals(oldItem.getEmail(),newItem.getEmail()) &&
+                        TextUtils.equals(oldItem.getPhone(),newItem.getPhone()) &&
+                        oldItem.getAvatar().equals(newItem.getAvatar());
             }
         });
 

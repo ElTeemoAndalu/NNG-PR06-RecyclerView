@@ -10,6 +10,7 @@ import es.iessaladillo.pedrojoya.pr05.data.local.model.User;
 public class UserListActivityViewModel extends ViewModel {
     private Database database;
     private LiveData<List<User>> users;
+    private User returnedUser;
 
     public UserListActivityViewModel(Database database) {
         this.database = database;
@@ -26,5 +27,17 @@ public class UserListActivityViewModel extends ViewModel {
 
     void editUser(User user) {
         database.editUser(user);
+    }
+
+    void addUser(User user) {
+        database.addUser(user);
+    }
+
+    public User getReturnedUser() {
+        return returnedUser;
+    }
+
+    public void setReturnedUser(User returnedUser) {
+        this.returnedUser = returnedUser;
     }
 }

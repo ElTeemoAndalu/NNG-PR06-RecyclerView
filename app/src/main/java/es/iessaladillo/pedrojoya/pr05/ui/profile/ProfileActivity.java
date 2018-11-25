@@ -331,7 +331,9 @@ public class ProfileActivity extends AppCompatActivity {
     //---------------------------------------METHODS TO START ACTIVITIES---------------------------
     public static void startForResult(Activity actividad, int requestCode, User user) {
         Intent intent = new Intent(actividad, ProfileActivity.class);
-        intent.putExtra(EXTRA_PROFILE, user);
+        if (user != null) {
+            intent.putExtra(EXTRA_PROFILE, user);
+        }
         actividad.startActivityForResult(intent, requestCode);
     }
 

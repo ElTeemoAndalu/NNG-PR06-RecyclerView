@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
@@ -18,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Nombre de ejemplo"
+            android:text="@string/userListItem_nameExample"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="email@ejemplo.inv"
+            android:text="@string/userListItem_emailExample"
             app:layout_constraintStart_toStartOf="@+id/lblName"
             app:layout_constraintTop_toBottomOf="@+id/lblName" />
 
@@ -37,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="666666666"
+            android:text="@string/userListItem_examplePhone"
             app:layout_constraintStart_toStartOf="@+id/lblEmail"
             app:layout_constraintTop_toBottomOf="@+id/lblEmail" />
 
@@ -47,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Edit"
+            android:text="@string/userListItem_btnEdit"
             app:layout_constraintStart_toStartOf="@+id/lblPhone"
             app:layout_constraintTop_toBottomOf="@+id/lblPhone" />
 
@@ -57,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Delete"
+            android:text="@string/userListItem_btnDelete"
             app:layout_constraintBottom_toBottomOf="@+id/btnEdit"
             app:layout_constraintStart_toEndOf="@+id/btnEdit" />
 
@@ -71,7 +70,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/cat1" />
+            app:srcCompat="@drawable/cat1"
+            android:contentDescription="@string/imgAvatar_description" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

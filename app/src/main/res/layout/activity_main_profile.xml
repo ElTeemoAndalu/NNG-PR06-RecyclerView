@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data></data>
+    <data />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,7 +30,8 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/lblName"
-            app:layout_constraintTop_toBottomOf="@+id/lblName">
+            app:layout_constraintTop_toBottomOf="@+id/lblName"
+            android:importantForAutofill="no">
 
             <requestFocus />
         </EditText>
@@ -59,7 +60,7 @@
             app:layout_constraintStart_toStartOf="@+id/lblEmail"
             app:layout_constraintTop_toBottomOf="@+id/lblEmail"
 
-            />
+            android:importantForAutofill="no" />
 
         <TextView
             android:id="@+id/lblPhonenumber"
@@ -112,7 +113,8 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/txtEmail"
             app:layout_constraintEnd_toStartOf="@+id/imgPhonenumber"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imgEmail" />
+            app:layout_constraintStart_toEndOf="@+id/imgEmail"
+            android:importantForAutofill="no" />
 
 
         <TextView
@@ -135,7 +137,8 @@
             android:inputType="text"
             app:layout_constraintEnd_toStartOf="@+id/imgAddress"
             app:layout_constraintStart_toStartOf="@+id/lblAddress"
-            app:layout_constraintTop_toBottomOf="@+id/lblAddress" />
+            app:layout_constraintTop_toBottomOf="@+id/lblAddress"
+            android:importantForAutofill="no" />
 
         <TextView
             android:id="@+id/lblWeb"
@@ -157,7 +160,8 @@
             android:inputType="textUri"
             app:layout_constraintEnd_toStartOf="@+id/imgWeb"
             app:layout_constraintStart_toStartOf="@+id/lblWeb"
-            app:layout_constraintTop_toBottomOf="@+id/lblWeb" />
+            app:layout_constraintTop_toBottomOf="@+id/lblWeb"
+            android:importantForAutofill="no" />
 
         <ImageView
             android:id="@+id/imgAddress"

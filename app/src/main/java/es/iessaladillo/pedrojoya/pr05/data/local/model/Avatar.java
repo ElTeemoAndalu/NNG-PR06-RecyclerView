@@ -66,6 +66,6 @@ public class Avatar implements Parcelable {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        return (obj instanceof Avatar && ((Avatar) obj).id == id) ? true : false;
+        return obj instanceof Avatar && ((Avatar) obj).id == id;
     }
 }

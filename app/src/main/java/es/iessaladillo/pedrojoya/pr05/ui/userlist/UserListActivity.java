@@ -28,7 +28,7 @@ public class UserListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
-        db = DataBindingUtil.setContentView(this,R.layout.activity_user_list);
+        db = DataBindingUtil.setContentView(this, R.layout.activity_user_list);
         vm = ViewModelProviders.of(this, new UserListActivityViewModelFactory(Database.getInstance())).get(UserListActivityViewModel.class);
         setupViews();
         observeUsers();
@@ -36,18 +36,14 @@ public class UserListActivity extends AppCompatActivity {
 
     private void setupViews() {
         setupRecyclerView();
-        db.lblEmptyView.setOnClickListener(v -> goToProfile(null,RC_PROFILE_ADD));
-        db.floatingActionButton2.setOnClickListener(v -> goToProfile(null,RC_PROFILE_ADD));
+        db.lblEmptyView.setOnClickListener(v -> goToProfile(null, RC_PROFILE_ADD));
+        db.floatingActionButton2.setOnClickListener(v -> goToProfile(null, RC_PROFILE_ADD));
     }
 
     private void setupRecyclerView() {
         ulistAdapter = new UserListActivityAdapter(
-                position -> {
-                    goToProfile(ulistAdapter.getItem(position), RC_PROFILE_EDIT);
-                },
-                position2 ->{
-                    deleteUser(ulistAdapter.getItem(position2));
-                }
+                position -> goToProfile(ulistAdapter.getItem(position), RC_PROFILE_EDIT),
+                position2 -> deleteUser(ulistAdapter.getItem(position2))
         );
         db.lstUser.setHasFixedSize(true);
         db.lstUser.setLayoutManager(new GridLayoutManager(this,
@@ -66,16 +62,17 @@ public class UserListActivity extends AppCompatActivity {
     private void editUser(User user) {
         vm.editUser(user);
     }
+
     private void deleteUser(User user) {
         vm.deleteUser(user);
     }
 
-    private void addUser(User user){
+    private void addUser(User user) {
         vm.addUser(user);
     }
 
     //---------------------------------------METHODS TO START ACTIVITIES---------------------------
-    private void goToProfile(User user,int requestCode) {
+    private void goToProfile(User user, int requestCode) {
         ProfileActivity.startForResult(this, requestCode, user);
     }
 
@@ -85,8 +82,8 @@ public class UserListActivity extends AppCompatActivity {
             getReturnedUser(data);
             if (requestCode == RC_PROFILE_EDIT) {
                 editUser(vm.getReturnedUser());
-            } else if(requestCode == RC_PROFILE_ADD){
-                addUser(vm.getReturnedUser() );
+            } else if (requestCode == RC_PROFILE_ADD) {
+                addUser(vm.getReturnedUser());
             }
         }
     }

@@ -25,4 +25,9 @@
     <string name="avatar_DefaultCatName">TextView</string>
     <string name="profileImgRatio">16:9</string>
     <string name="userlist_lblEmptyView">Add user</string>
+    <string name="userListItem_examplePhone">666666666</string>
+    <string name="userListItem_emailExample">email@ejemplo.inv</string>
+    <string name="userListItem_nameExample">Nombre de ejemplo</string>
+    <string name="userListItem_btnEdit">Edit</string>
+    <string name="userListItem_btnDelete">Delete</string>
 </resources>

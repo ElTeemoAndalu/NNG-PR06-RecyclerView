@@ -50,11 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String EXTRA_PROFILE = "EXTRA_PROFILE";
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbPro = DataBindingUtil.setContentView(this, R.layout.activity_main_profile);
@@ -85,12 +80,12 @@ public class ProfileActivity extends AppCompatActivity {
         lblFields[ADDRESS] = ActivityCompat.requireViewById(this, R.id.lblAddress);
         lblFields[WEB] = ActivityCompat.requireViewById(this, R.id.lblWeb);
 
-        if(model.getProfileUser() == null){
+        if (model.getProfileUser() == null) {
             model.setProfileUser(new User());
             model.setDefaultAvatar();
             configAvatarProfile();
-        }else{
-            showUser(model.getProfileUser());
+        } else {
+            showUser();
         }
 
 
@@ -355,12 +350,12 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void showUser(User profileUser) {
-        txtFields[NAME].setText(model.getProfileUser().getName().toString());
-        txtFields[EMAIL].setText(model.getProfileUser().getEmail().toString());
-        txtFields[PHONE].setText(model.getProfileUser().getPhone().toString());
-        txtFields[ADDRESS].setText(model.getProfileUser().getAddress().toString());
-        txtFields[WEB].setText(model.getProfileUser().getWeb().toString());
+    private void showUser() {
+        txtFields[NAME].setText(model.getProfileUser().getName());
+        txtFields[EMAIL].setText(model.getProfileUser().getEmail());
+        txtFields[PHONE].setText(model.getProfileUser().getPhone());
+        txtFields[ADDRESS].setText(model.getProfileUser().getAddress());
+        txtFields[WEB].setText(model.getProfileUser().getWeb());
 
         configAvatarProfile();
     }

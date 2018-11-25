@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 
+@SuppressWarnings("ALL")
 public class UserListActivityViewModelFactory implements ViewModelProvider.Factory {
 
     private final Database database;

@@ -8,8 +8,8 @@ import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.User;
 
 public class UserListActivityViewModel extends ViewModel {
-    private Database database;
-    private LiveData<List<User>> users;
+    private final Database database;
+    private final LiveData<List<User>> users;
     private User returnedUser;
 
     public UserListActivityViewModel(Database database) {

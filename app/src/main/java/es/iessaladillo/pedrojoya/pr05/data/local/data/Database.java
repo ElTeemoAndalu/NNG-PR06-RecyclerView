@@ -20,9 +20,9 @@ public class Database {
 
     private final ArrayList<Avatar> avatars = new ArrayList<>();
     private final ArrayList<User> users = new ArrayList<>(Arrays.asList(
-            new User(1, new Avatar(R.drawable.cat1, "Tom"),"Baldo", "baldo@mero.com","666666666","Calle Falsa 123","http://www.baldomeromola.biz"),
-            new User(2, new Avatar(R.drawable.cat2, "Luna"),"German", "german@mero.com","776666666","Calle Falsa 234","http://www.baldomenoromola.biz"),
-            new User(3, new Avatar(R.drawable.cat3, "Simba"),"Dolores Fuertes De Barriga", "dolores@barriga.de","776666666","Calle Verdadera 24","http://www.webajenaabaldomero.biz")
+            new User(1, new Avatar(R.drawable.cat1, "Tom"), "Baldo", "baldo@mero.com", "666666666", "Calle Falsa 123", "http://www.baldomeromola.biz"),
+            new User(2, new Avatar(R.drawable.cat2, "Luna"), "German", "german@mero.com", "776666666", "Calle Falsa 234", "http://www.baldomenoromola.biz"),
+            new User(3, new Avatar(R.drawable.cat3, "Simba"), "Dolores Fuertes De Barriga", "dolores@barriga.de", "776666666", "Calle Verdadera 24", "http://www.webajenaabaldomero.biz")
     ));
 
     private final MutableLiveData<List<User>> usersLiveData = new MutableLiveData<>();
@@ -42,9 +42,7 @@ public class Database {
 
     public static Database getInstance() {
         if (instance == null) {
-                if (instance == null) {
-                    instance = new Database();
-                }
+            instance = new Database();
         }
         return instance;
     }
@@ -72,7 +70,7 @@ public class Database {
     }
 
     public Avatar queryAvatar(long id) {
-        for (Avatar avatar: avatars) {
+        for (Avatar avatar : avatars) {
             if (avatar.getId() == id) {
                 return avatar;
             }
@@ -109,8 +107,8 @@ public class Database {
 
     public void editUser(User user) {
         for (int i = 0; i < users.size(); i++) {
-            if(users.get(i).getId() == user.getId()){
-                users.set(i,user);
+            if (users.get(i).getId() == user.getId()) {
+                users.set(i, user);
                 break;
             }
         }

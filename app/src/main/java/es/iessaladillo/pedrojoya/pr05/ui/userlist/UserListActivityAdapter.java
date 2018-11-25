@@ -30,9 +30,9 @@ public class UserListActivityAdapter extends ListAdapter<User, UserListActivityA
 
             @Override
             public boolean areContentsTheSame(@NonNull User oldItem, @NonNull User newItem) {
-                return TextUtils.equals(oldItem.getName(),newItem.getName()) &&
-                        TextUtils.equals(oldItem.getEmail(),newItem.getEmail()) &&
-                        TextUtils.equals(oldItem.getPhone(),newItem.getPhone()) &&
+                return TextUtils.equals(oldItem.getName(), newItem.getName()) &&
+                        TextUtils.equals(oldItem.getEmail(), newItem.getEmail()) &&
+                        TextUtils.equals(oldItem.getPhone(), newItem.getPhone()) &&
                         oldItem.getAvatar().equals(newItem.getAvatar());
             }
         });
@@ -63,11 +63,11 @@ public class UserListActivityAdapter extends ListAdapter<User, UserListActivityA
 
     //VIEWHOLDER
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView lblName,lblEmail,lblPhoneNumber;
+        private final TextView lblName, lblEmail, lblPhoneNumber;
         private final ImageView imgAvatar;
-        private final Button btnEdit,btnDelete;
+        private final Button btnEdit, btnDelete;
 
-        ViewHolder(View itemView,OnEditClickListener editListener, OnDeleteClickListener deleteListener) {
+        ViewHolder(View itemView, OnEditClickListener editListener, OnDeleteClickListener deleteListener) {
             super(itemView);
             lblName = ViewCompat.requireViewById(itemView, R.id.lblName);
             lblEmail = ViewCompat.requireViewById(itemView, R.id.lblEmail);

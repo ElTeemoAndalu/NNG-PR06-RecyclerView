@@ -23,17 +23,6 @@ public class User implements Parcelable {
         this.web = web;
     }
 
-    public void editUser(User user) {
-        this.avatar = user.avatar;
-        this.name = user.name;
-        this.email = user.email;
-        this.phone = user.phone;
-        this.address = user.address;
-        this.web = user.web;
-
-
-    }
-
     public int getId() {
         return id;
     }

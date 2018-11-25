@@ -3,18 +3,27 @@ package es.iessaladillo.pedrojoya.pr05.ui.profile;
 import androidx.lifecycle.ViewModel;
 import es.iessaladillo.pedrojoya.pr05.data.local.data.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.Avatar;
+import es.iessaladillo.pedrojoya.pr05.data.local.model.User;
 
 class ProfileActivityViewModel extends ViewModel {
     private Database database;
-    private Avatar profileAvatar;
     private boolean firstLaunch = false;
+    private User profileUser;
 
-    public Avatar getProfileAvatar() {
-        return profileAvatar;
+    public User getProfileUser() {
+        return profileUser;
     }
 
-    public void setProfileAvatar(Avatar profileAvatar) {
-        this.profileAvatar = profileAvatar;
+    public void setProfileUser(User profileUser) {
+        this.profileUser = profileUser;
+    }
+
+    public Avatar getProfileAvatar() {
+        return profileUser.getAvatar();
+    }
+
+    public void setProfileAvatar(Avatar avatar) {
+        profileUser.setAvatar(avatar);
     }
 
     private Database getDatabase() {

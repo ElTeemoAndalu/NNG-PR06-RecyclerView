@@ -1,8 +1,11 @@
 package es.iessaladillo.pedrojoya.pr05.data.local.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.Nullable;
 
-public class User {
+public class User implements Parcelable {
     private int id;
     private Avatar avatar;
     private String name, email, phone, address, web;
@@ -74,5 +77,68 @@ public class User {
 
         }
         return result;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeParcelable(this.avatar, flags);
+        dest.writeString(this.name);
+        dest.writeString(this.email);
+        dest.writeString(this.phone);
+        dest.writeString(this.address);
+        dest.writeString(this.web);
+    }
+
+    protected User(Parcel in) {
+        this.id = in.readInt();
+        this.avatar = in.readParcelable(Avatar.class.getClassLoader());
+        this.name = in.readString();
+        this.email = in.readString();
+        this.phone = in.readString();
+        this.address = in.readString();
+        this.web = in.readString();
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
     }
 }

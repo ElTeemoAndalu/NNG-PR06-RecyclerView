@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import es.iessaladillo.pedrojoya.pr05.R;
 import es.iessaladillo.pedrojoya.pr05.data.local.business.FieldEnabler;
-import es.iessaladillo.pedrojoya.pr05.data.local.model.Avatar;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.User;
 import es.iessaladillo.pedrojoya.pr05.databinding.ActivityMainProfileBinding;
 import es.iessaladillo.pedrojoya.pr05.ui.avatar.AvatarActivity;
@@ -62,6 +60,9 @@ public class ProfileActivity extends AppCompatActivity {
         dbPro = DataBindingUtil.setContentView(this, R.layout.activity_main_profile);
         setContentView(R.layout.activity_profile);
         model = ViewModelProviders.of(this).get(ProfileActivityViewModel.class);
+        if (savedInstanceState == null) {
+            getIntentData(getIntent());
+        }
         setupViews();
     }
 
@@ -84,10 +85,14 @@ public class ProfileActivity extends AppCompatActivity {
         lblFields[ADDRESS] = ActivityCompat.requireViewById(this, R.id.lblAddress);
         lblFields[WEB] = ActivityCompat.requireViewById(this, R.id.lblWeb);
 
-        getIntentData(getIntent());
+        if(model.getProfileUser() == null){
+            model.setProfileUser(new User());
+            model.setDefaultAvatar();
+            configAvatarProfile();
+        }else{
+            showUser(model.getProfileUser());
+        }
 
-        model.setDefaultAvatar();
-        configAvatarProfile();
 
         //Listeners
         imgAvatar.setOnClickListener(v -> selectAvatarImg());
@@ -284,12 +289,21 @@ public class ProfileActivity extends AppCompatActivity {
     private void save() {
         KeyboardUtils.hideSoftKeyboard(this);
         if (validateAll()) {
-            SnackBarUtils.showSnackBar(lblFields[NAME], getString(R.string.main_saved_succesfully));
+            saveUser();
+            finish();
         } else {
             SnackBarUtils.showSnackBar(lblFields[NAME], getString(R.string.main_error_saving));
         }
 
 
+    }
+
+    private void saveUser() {
+        model.getProfileUser().setName(txtFields[NAME].getText().toString());
+        model.getProfileUser().setEmail(txtFields[EMAIL].getText().toString());
+        model.getProfileUser().setPhone(txtFields[PHONE].getText().toString());
+        model.getProfileUser().setAddress(txtFields[ADDRESS].getText().toString());
+        model.getProfileUser().setWeb(txtFields[WEB].getText().toString());
     }
 
     //It checks if all the edittexts pass the requirements and shows errors if they do not
@@ -317,27 +331,36 @@ public class ProfileActivity extends AppCompatActivity {
     //---------------------------------------METHODS TO START ACTIVITIES---------------------------
     public static void startForResult(Activity actividad, int requestCode, User user) {
         Intent intent = new Intent(actividad, ProfileActivity.class);
-//        intent.putExtra(EXTRA_AVATAR, avatar);
+        intent.putExtra(EXTRA_PROFILE, user);
         actividad.startActivityForResult(intent, requestCode);
     }
 
     @Override
     public void finish() {
-//        sendAvatarBack();
+        sendUserBack();
         super.finish();
     }
-//
-//    private void sendAvatarBack() {
-//        Intent intent = new Intent();
-//        intent.putExtra(EXTRA_AVATAR, model.getSelectedAvatar());
-//        this.setResult(RESULT_OK, intent);
-//    }
+
+    private void sendUserBack() {
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_PROFILE, model.getProfileUser());
+        this.setResult(RESULT_OK, intent);
+    }
 
     private void getIntentData(Intent intent) {
         if (intent != null && intent.hasExtra(EXTRA_PROFILE)) {
-            Toast.makeText(this,"Ya toy aqui",Toast.LENGTH_SHORT).show();
-//            model.setSelectedAvatar(intent.getParcelableExtra(EXTRA_AVATAR));
+            model.setProfileUser(intent.getParcelableExtra(EXTRA_PROFILE));
         }
+    }
+
+    private void showUser(User profileUser) {
+        txtFields[NAME].setText(model.getProfileUser().getName().toString());
+        txtFields[EMAIL].setText(model.getProfileUser().getEmail().toString());
+        txtFields[PHONE].setText(model.getProfileUser().getPhone().toString());
+        txtFields[ADDRESS].setText(model.getProfileUser().getAddress().toString());
+        txtFields[WEB].setText(model.getProfileUser().getWeb().toString());
+
+        configAvatarProfile();
     }
 
 }

@@ -59,7 +59,7 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void editUser(User user) {
-        selectAvatarImg();
+        selectAvatarImg(user);
         vm.editUser(user);
     }
     private void deleteUser(User user) {
@@ -67,8 +67,8 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     //---------------------------------------METHODS TO START ACTIVITIES---------------------------
-    private void selectAvatarImg() {
-        ProfileActivity.startForResult(this, RC_PROFILE, null);
+    private void selectAvatarImg(User user) {
+        ProfileActivity.startForResult(this, RC_PROFILE, user);
     }
 
     @Override

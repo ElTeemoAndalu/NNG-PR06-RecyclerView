@@ -46,13 +46,12 @@ public class ProfileActivity extends AppCompatActivity {
     private final TextView[] lblFields = new TextView[EDITTEXT_QUANTITY];
     private String errorMsg;
     private ProfileActivityViewModel model;
-    private ActivityMainProfileBinding dbPro;
     public static final String EXTRA_PROFILE = "EXTRA_PROFILE";
+    private ImageView imgEmail,imgPhone,imgAddress,imgWeb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbPro = DataBindingUtil.setContentView(this, R.layout.activity_main_profile);
         setContentView(R.layout.activity_profile);
         model = ViewModelProviders.of(this).get(ProfileActivityViewModel.class);
         if (savedInstanceState == null) {
@@ -80,6 +79,11 @@ public class ProfileActivity extends AppCompatActivity {
         lblFields[ADDRESS] = ActivityCompat.requireViewById(this, R.id.lblAddress);
         lblFields[WEB] = ActivityCompat.requireViewById(this, R.id.lblWeb);
 
+        imgEmail = ActivityCompat.requireViewById(this, R.id.imgEmail);
+        imgPhone = ActivityCompat.requireViewById(this, R.id.imgPhonenumber);
+        imgAddress = ActivityCompat.requireViewById(this, R.id.imgAddress);
+        imgWeb = ActivityCompat.requireViewById(this, R.id.imgWeb);
+
         if (model.getProfileUser() == null) {
             model.setProfileUser(new User());
             model.setDefaultAvatar();
@@ -102,10 +106,10 @@ public class ProfileActivity extends AppCompatActivity {
             txt.setOnFocusChangeListener(this::changeLblStyle);
         }
 
-        dbPro.imgEmail.setOnClickListener(v -> sendEmail());
-        dbPro.imgPhonenumber.setOnClickListener(v -> callPhone());
-        dbPro.imgAddress.setOnClickListener(v -> showAddress());
-        dbPro.imgWeb.setOnClickListener(v -> searchURL());
+        imgEmail.setOnClickListener(v -> sendEmail());
+        imgPhone.setOnClickListener(v -> callPhone());
+        imgAddress.setOnClickListener(v -> showAddress());
+        imgWeb.setOnClickListener(v -> searchURL());
 
         //These listeners are split due to them not working on a separate class
         txtFields[NAME].addTextChangedListener(new TextWatcher() {
@@ -130,7 +134,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                FieldEnabler.enableOrDisableFieldState(ValidationUtils.isValidEmail(s.toString()), txtFields[EMAIL], dbPro.imgEmail, lblFields[EMAIL], errorMsg);
+                FieldEnabler.enableOrDisableFieldState(ValidationUtils.isValidEmail(s.toString()), txtFields[EMAIL], imgEmail, lblFields[EMAIL], errorMsg);
             }
 
             @Override
@@ -145,7 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                FieldEnabler.enableOrDisableFieldState(ValidationUtils.isValidPhone(s.toString()), txtFields[PHONE], dbPro.imgPhonenumber, lblFields[PHONE], errorMsg);
+                FieldEnabler.enableOrDisableFieldState(ValidationUtils.isValidPhone(s.toString()), txtFields[PHONE], imgPhone, lblFields[PHONE], errorMsg);
             }
 
             @Override
@@ -160,7 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                FieldEnabler.enableOrDisableFieldState(TextUtils.isEmpty(s), txtFields[ADDRESS], dbPro.imgAddress, lblFields[ADDRESS], errorMsg);
+                FieldEnabler.enableOrDisableFieldState(TextUtils.isEmpty(s), txtFields[ADDRESS], imgAddress, lblFields[ADDRESS], errorMsg);
             }
 
             @Override
@@ -175,7 +179,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                FieldEnabler.enableOrDisableFieldState(ValidationUtils.isValidUrl(s.toString()), txtFields[WEB], dbPro.imgWeb, lblFields[WEB], errorMsg);
+                FieldEnabler.enableOrDisableFieldState(ValidationUtils.isValidUrl(s.toString()), txtFields[WEB], imgWeb, lblFields[WEB], errorMsg);
             }
 
             @Override
@@ -310,10 +314,10 @@ public class ProfileActivity extends AppCompatActivity {
         boolean checkeb = ValidationUtils.isValidUrl(txtFields[WEB].getText().toString());
 
         FieldEnabler.enableOrDisableFieldState(checkName, txtFields[NAME], null, lblFields[NAME], errorMsg);
-        FieldEnabler.enableOrDisableFieldState(checkEmail, txtFields[EMAIL], dbPro.imgEmail, lblFields[EMAIL], errorMsg);
-        FieldEnabler.enableOrDisableFieldState(checkPhone, txtFields[PHONE], dbPro.imgPhonenumber, lblFields[PHONE], errorMsg);
-        FieldEnabler.enableOrDisableFieldState(checkAddress, txtFields[ADDRESS], dbPro.imgAddress, lblFields[ADDRESS], errorMsg);
-        FieldEnabler.enableOrDisableFieldState(checkeb, txtFields[WEB], dbPro.imgWeb, lblFields[WEB], errorMsg);
+        FieldEnabler.enableOrDisableFieldState(checkEmail, txtFields[EMAIL], imgEmail, lblFields[EMAIL], errorMsg);
+        FieldEnabler.enableOrDisableFieldState(checkPhone, txtFields[PHONE], imgPhone, lblFields[PHONE], errorMsg);
+        FieldEnabler.enableOrDisableFieldState(checkAddress, txtFields[ADDRESS], imgAddress, lblFields[ADDRESS], errorMsg);
+        FieldEnabler.enableOrDisableFieldState(checkeb, txtFields[WEB], imgWeb, lblFields[WEB], errorMsg);
 
         for (int i = 0; i < lblFields[0].length(); i++) {
             if (!lblFields[i].isEnabled()) {

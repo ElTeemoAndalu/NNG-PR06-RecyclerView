@@ -13,30 +13,36 @@
 
         <TextView
             android:id="@+id/lblName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/userListItem_nameExample"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/imgAvatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblEmail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/userListItem_emailExample"
+            app:layout_constraintEnd_toStartOf="@+id/imgAvatar"
             app:layout_constraintStart_toStartOf="@+id/lblName"
             app:layout_constraintTop_toBottomOf="@+id/lblName" />
 
         <TextView
             android:id="@+id/lblPhone"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/userListItem_examplePhone"
+            app:layout_constraintEnd_toStartOf="@+id/imgAvatar"
             app:layout_constraintStart_toStartOf="@+id/lblEmail"
             app:layout_constraintTop_toBottomOf="@+id/lblEmail" />
 
@@ -56,29 +62,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/userListItem_btnDelete"
             app:layout_constraintBottom_toBottomOf="@+id/btnEdit"
-            app:layout_constraintStart_toEndOf="@+id/btnEdit" />
+            app:layout_constraintStart_toEndOf="@+id/btnEdit"
+            app:layout_constraintTop_toBottomOf="@+id/lblPhone" />
 
         <ImageView
             android:id="@+id/imgAvatar"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/imgAvatar_description"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/lblPhone"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/cat1"
-            android:contentDescription="@string/imgAvatar_description" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="242dp" />
+            app:srcCompat="@drawable/cat1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
